@@ -1,29 +1,48 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.IO;
+using UnityEngine.UI;
 
 public class ScrollButton : MonoBehaviour
 {
-    public string side;
-    public GameObject panel1, panel2, content;
+    GameObject content, right_circle, left_circle, scroll_view;
+    //public GameObject toggle_circle;// left_button, right_button;
 
-    Vector2 v;
+    private void Start()
+    {
+        content = GameObject.Find("Content");
+        scroll_view = GameObject.Find("Scroll View");
+        right_circle = GameObject.Find("Right_Circle");
+        left_circle = GameObject.Find("Left_Circle");
+
+        //if (right_circle != null)
+        //    right_circle.GetComponent<>;
+
+    }
+
+    private void OnMouseDown()
+    {
+        scroll_view.GetComponent<ScrollRect>().enabled = false;
+    }
+
+    private void OnMouseUp()
+    {
+        scroll_view.GetComponent<ScrollRect>().enabled = true;
+    }
+
 
 
     void OnMouseUpAsButton()
     {
-        //content.GetComponent<Scroll>().Scrolling(true);
-
-        if (side == "left" && content.GetComponent<RectTransform>().anchoredPosition.x < -600)
+        if (GetComponent<Object>().name == "Left_Button" && content.GetComponent<RectTransform>().anchoredPosition.x < -600)
         {
             content.GetComponent<RectTransform>().anchoredPosition = new Vector2(content.GetComponent<RectTransform>().anchoredPosition.x + 1200, 0);
-            GetComponent<ChangeActive>().ChangeCircles();
+            left_circle.GetComponent<Toggle>().isOn = true;
         }
-        else if (side == "right" && content.GetComponent<RectTransform>().anchoredPosition.x > -600)
+        else if (GetComponent<Object>().name == "Right_Button" && content.GetComponent<RectTransform>().anchoredPosition.x > -600)
         {
             content.GetComponent<RectTransform>().anchoredPosition = new Vector2(content.GetComponent<RectTransform>().anchoredPosition.x - 1200, 0);
-            GetComponent<ChangeActive>().ChangeCircles();
+            right_circle.GetComponent<Toggle>().isOn = true;
         }
 
         

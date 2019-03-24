@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.IO;
+using UnityEngine.UI;
 
 public class Scroll : MonoBehaviour
 {
     //private RectTransform contentRect;
     Vector2 position;
-
     bool _scroll;
-
     float pos, posBeg;
-
     float q = 20;
+    GameObject right_circle, left_circle;
+
+    private void Start()
+    {
+        right_circle = GameObject.Find("Right_Circle");
+        left_circle = GameObject.Find("Left_Circle");
+    }
 
     public void Scrolling(bool scroll)
     {
@@ -26,13 +30,11 @@ public class Scroll : MonoBehaviour
         {
             if((GetComponent<RectTransform>().anchoredPosition.x > -600) & (GetComponent<RectTransform>().anchoredPosition.x < 600))
             {
-               GetComponent<ChangeActive>().a_l.GetComponent<Renderer>().enabled = true;
-               GetComponent<ChangeActive>().a_r.GetComponent<Renderer>().enabled = false;
+                left_circle.GetComponent<Toggle>().isOn = true;
 
             } else if((GetComponent<RectTransform>().anchoredPosition.x < -600) & (GetComponent<RectTransform>().anchoredPosition.x > -1800))
             {
-                GetComponent<ChangeActive>().a_l.GetComponent<Renderer>().enabled = false;
-                GetComponent<ChangeActive>().a_r.GetComponent<Renderer>().enabled = true;
+                right_circle.GetComponent<Toggle>().isOn = true;
             }
                 
 

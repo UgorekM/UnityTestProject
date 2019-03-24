@@ -11,14 +11,13 @@ public class Button : MonoBehaviour
     public Sprite no_press, press;
 
     void OnMouseDown()
-
     {
-        GetComponent<SpriteRenderer>().sprite = press;
+        GetComponent<Image>().sprite = press;
     }
 
     void OnMouseUp()
     {
-        GetComponent<SpriteRenderer>().sprite = no_press;
+        GetComponent<Image>().sprite = no_press;
     }
 
 }
